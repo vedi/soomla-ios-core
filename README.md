@@ -22,7 +22,7 @@ SOOMLA modules internally use these features, though we encourage you to use the
 
 ## Download
 
-#### Pre baked zip:
+#### Pre baked libraries
 
 [soomla-ios-core](http://library.soom.la/fetch/ios-core/latest?cf=github)
 
