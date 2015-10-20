@@ -26,7 +26,9 @@
 #define KEYVAL_COLUMN_VAL   @"val"
 
 
-@implementation KeyValDatabase
+@implementation KeyValDatabase {
+    dispatch_queue_t db_querying_queue;
+}
 
 - (void)createDBWithPath:(const char *)dbpath {
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
@@ -68,6 +70,7 @@
                 NSURL* url = [NSURL fileURLWithPath:databasebPath];
                 [SoomlaUtils addSkipBackupAttributeToItemAtURL:url];
             }
+            db_querying_queue = dispatch_queue_create("com.soomla.KeyValueDatabase", NULL);
         }
         return self;
     }
@@ -101,6 +104,13 @@
             LogError(TAG, @"Failed to open/create database");
         }
     }
+}
+
+-(void)deleteKeyValWithKeyAsync:(NSString *)key callback:(void (^)())callback {
+    dispatch_async(db_querying_queue, ^{
+        [self deleteKeyValWithKey:key];
+        dispatch_async(dispatch_get_main_queue(), callback);
+    });
 }
 
 - (void)purgeDatabase {
@@ -346,6 +356,15 @@
     }
 }
 
+-(void)getValForKeyAsync:(NSString *)key callback:(void (^)(NSString *value))callback {
+    dispatch_async(db_querying_queue, ^{
+        NSString *result = [self getValForKey:key];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(result);
+        });
+    });
+}
+
 
 - (void)setVal:(NSString *)val forKey:(NSString *)key{
     @synchronized(self) {
@@ -398,6 +417,13 @@
             LogError(TAG, @"Failed to open/create database");
         }
     }
+}
+
+-(void)setValAsync:(NSString *)val forKey:(NSString *)key callback:(void (^)())callback {
+    dispatch_async(db_querying_queue, ^{
+        [self setVal:val forKey:key];
+        dispatch_async(dispatch_get_main_queue(), callback);
+    });
 }
 
 #pragma mark - Application's Documents directory

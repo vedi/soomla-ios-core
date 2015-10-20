@@ -32,6 +32,14 @@
 + (NSString*)getValueForKey:(NSString*)key;
 
 /**
+ Retrieves the value for the given `key` asynchronously.
+
+ @param key The key in the key-val pair.
+ @param callback Block which will be invoked when operation will be completed.
+ */
++ (void)getValueForKeyAsync:(NSString *)key callback:(void(^)(NSString *))callback;
+
+/**
  Sets the given value to the given `key`.
  
  @param val The val in the key-val pair.
@@ -40,11 +48,28 @@
 + (void)setValue:(NSString*)val forKey:(NSString*)key;
 
 /**
+ Sets the given value to the given `key` asynchronously.
+
+ @param val The val in the key-val pair.
+ @param key The key in the key-val pair.
+ @param callback Block which will be invoked when operation will be completed.
+ */
++ (void)setValueAsync:(NSString *)val forKey:(NSString *)key callback:(void(^)())callback;
+
+/**
  Deletes the key-val pair with the given `key`.
  
  @param key The key in the key-val pair.
  */
 + (void)deleteValueForKey:(NSString*)key;
+
+/**
+ Deletes the key-val pair with the given `key` asynchronously.
+
+ @param key The key in the key-val pair.
+ @param callback Block which will be invoked when operation will be completed.
+ */
++ (void)deleteValueForKeyAsync:(NSString *)key callback:(void(^)())callback;
 
 /**
  Retrieves the key-val pairs that answer the given `query`.

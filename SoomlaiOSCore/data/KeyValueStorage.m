@@ -50,14 +50,35 @@
     return NULL;
 }
 
++ (void)getValueForKeyAsync:(NSString *)key callback:(void (^)(NSString *))callback {
+    key = [SoomlaEncryptor encryptString:key];
+    [[self kvDatabase] getValForKeyAsync:key callback:^(NSString *val){
+        if (val && val.length > 0) {
+            callback([SoomlaEncryptor decryptToString:val]);
+        } else {
+            callback(nil);
+        }
+    }];
+}
+
 + (void)setValue:(NSString*)val forKey:(NSString*)key {
     key = [SoomlaEncryptor encryptString:key];
     [[self kvDatabase] setVal:[SoomlaEncryptor encryptString:val] forKey:key];
 }
 
++ (void)setValueAsync:(NSString *)val forKey:(NSString *)key callback:(void (^)())callback {
+    key = [SoomlaEncryptor encryptString:key];
+    [[self kvDatabase] setValAsync:val forKey:key callback:callback];
+}
+
 + (void)deleteValueForKey:(NSString*)key {
     key = [SoomlaEncryptor encryptString:key];
     [[self kvDatabase] deleteKeyValWithKey:key];
+}
+
++ (void)deleteValueForKeyAsync:(NSString *)key callback:(void (^)())callback {
+    key = [SoomlaEncryptor encryptString:key];
+    [[self kvDatabase] deleteKeyValWithKeyAsync:key callback:callback];
 }
 
 + (NSDictionary*)getKeysValuesForNonEncryptedQuery:(NSString*)query {
