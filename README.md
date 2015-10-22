@@ -27,7 +27,7 @@ SOOMLA modules internally use these features, though we encourage you to use the
 [soomla-ios-core](http://library.soom.la/fetch/ios-core/latest?cf=github)
 
 #### From sources:
- - Clone this repository;
+ - Clone this repository recursively: `git clone --recursive https://github.com/soomla/soomla-ios-core.git`;
  - Run `./build_all` from project directory;
  - Take created binaries from `build` directory and use it!
 
