@@ -155,7 +155,7 @@
  @param key The key whose key-val pair is to be deleted.
  @param callback Block which will be invoked after completion.
  */
-- (void)deleteKeyValWithKeyAsync:(NSString *)key callback(void(^)())callback;
+- (void)deleteKeyValWithKeyAsync:(NSString *)key callback:(void(^)())callback;
 
 /**
  Purges the entire DB
