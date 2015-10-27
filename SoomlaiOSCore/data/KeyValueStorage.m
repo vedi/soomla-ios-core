@@ -68,7 +68,7 @@
 
 + (void)setValueAsync:(NSString *)val forKey:(NSString *)key callback:(void (^)())callback {
     key = [SoomlaEncryptor encryptString:key];
-    [[self kvDatabase] setValAsync:val forKey:key callback:callback];
+    [[self kvDatabase] setValAsync:[SoomlaEncryptor encryptString:val] forKey:key callback:callback];
 }
 
 + (void)deleteValueForKey:(NSString*)key {
