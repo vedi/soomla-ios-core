@@ -69,6 +69,14 @@
 - (NSDictionary*)getKeysValsForQuery:(NSString*)query;
 
 /**
+ Retrieves from DB the key-val pairs that answer the given `query` asynchronously.
+
+ @param query What to fetch from the DB.
+ @param callback Block which will be invoked after completion.
+ */
+- (void)getKeysValsForQueryAsync:(NSString *)query callback:(void(^)(NSDictionary *))callback;
+
+/**
  Retrieves from the DB the values of the key-val pairs that answer the given
  `query`.
  
@@ -76,6 +84,15 @@
  @return The values of the key-val pairs fetched.
  */
 - (NSArray*)getValsForQuery:(NSString*)query;
+
+/**
+ Retrieves from the DB the values of the key-val pairs that answer the given
+ `query` asynchronously.
+
+ @param query The query that indicates what to fetch from the DB.
+ @param callback Block which will be invoked after completion.
+ */
+- (void)getValsForQueryAsync:(NSString *)query callback:(void(^)(NSArray *))callback;
 
 /**
  Retrieves from the DB ONE value of the key-val pairs that answer the given
@@ -87,6 +104,15 @@
 - (NSString*)getOneForQuery:(NSString*)query;
 
 /**
+ Retrieves from the DB ONE value of the key-val pairs that answer the given
+ `query` asynchronously.
+
+ @param query The query that indicates what to fetch from the DB.
+ @param callback Block which will be invoked after completion.
+ */
+- (void)getOneForQueryAsync:(NSString *)query callback:(void(^)(NSString *))callback;
+
+/**
  Counts the number of key-val pairs that answer the given `query`.
  
  @param query The query that indicates what to count in the DB.
@@ -95,11 +121,26 @@
 - (int)getCountForQuery:(NSString*)query;
 
 /**
+ Counts the number of key-val pairs that answer the given `query` asynchronously.
+
+ @param query The query that indicates what to count in the DB.
+ @param callback Block which will be invoked after completion.
+ */
+- (void)getCountForQueryAsync:(NSString *)query callback:(void(^)(int))callback;
+
+/**
  Gets all the keys in the DB
  
  @return a list of `NSString`s containing all the keys in the DB.
  */
 - (NSArray *)getAllKeys;
+
+/**
+ Gets all the keys in the DB asynchronously
+
+ @param callback Block which will be invoked after completion.
+ */
+- (void)getAllKeysAsync:(void(^)(NSArray *))callback;
 
 /**
  Deletes from the DB the key-val pair with the given `key`.
@@ -112,9 +153,9 @@
  Deletes from the DB the key-val pair with the given `key` asynchronously.
 
  @param key The key whose key-val pair is to be deleted.
- @param callback Block which will be invoked when operation will be completed.
+ @param callback Block which will be invoked after completion.
  */
--(void)deleteKeyValWithKeyAsync:(NSString *)key callback:(void(^)())callback;
+- (void)deleteKeyValWithKeyAsync:(NSString *)key callback(void(^)())callback;
 
 /**
  Purges the entire DB
@@ -123,6 +164,16 @@
  This message is used mainly for while in testing.
  */
 - (void)purgeDatabase;
+
+/**
+ Purges the entire DB asynchronously
+
+ NOTE: Use with caution, since this will delete all the user's local information
+ This message is used mainly for while in testing.
+
+ @param callback Block which will be invoked when operation will be completed.
+ */
+- (void)purgeDatabaseAsync:(void(^)())callback;
 
 
 /** SOOMLA keys **/

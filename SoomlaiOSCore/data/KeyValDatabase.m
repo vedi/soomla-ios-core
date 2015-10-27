@@ -76,7 +76,7 @@
     }
 }
 
-- (void)deleteKeyValWithKey:(NSString *)key{
+- (void)deleteKeyValWithKeyInternal:(NSString *)key{
     @synchronized(self) {
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
@@ -106,14 +106,23 @@
     }
 }
 
+-(void)deleteKeyValWithKey:(NSString *)key {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self deleteKeyValWithKeyAsync:key callback:^{
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+
+}
+
 -(void)deleteKeyValWithKeyAsync:(NSString *)key callback:(void (^)())callback {
     dispatch_async(db_querying_queue, ^{
-        [self deleteKeyValWithKey:key];
+        [self deleteKeyValWithKeyInternal:key];
         dispatch_async(dispatch_get_main_queue(), callback);
     });
 }
 
-- (void)purgeDatabase {
+- (void)purgeDatabaseInternal {
     @synchronized(self) {
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
@@ -140,7 +149,22 @@
     }
 }
 
-- (NSDictionary*)getKeysValsForQuery:(NSString*)query {
+-(void)purgeDatabase {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self purgeDatabaseAsync:^{
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+}
+
+-(void)purgeDatabaseAsync:(void (^)())callback {
+    dispatch_async(db_querying_queue, ^{
+        [self purgeDatabaseInternal];
+        dispatch_async(dispatch_get_main_queue(), callback);
+    });
+}
+
+- (NSDictionary*)getKeysValsForQueryInternal:(NSString*)query {
     @synchronized(self) {
         NSMutableDictionary *results = [NSMutableDictionary dictionary];
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
@@ -177,7 +201,27 @@
     }
 }
 
-- (NSArray*)getValsForQuery:(NSString*)query {
+-(NSDictionary *)getKeysValsForQuery:(NSString *)query {
+    __block NSDictionary *result;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self getKeysValsForQueryAsync:query callback:^(NSDictionary *val){
+        result = val;
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return result;
+}
+
+-(void)getKeysValsForQueryAsync:(NSString *)query callback:(void (^)(NSDictionary *result))callback {
+    dispatch_async(db_querying_queue, ^{
+        NSDictionary *result = [self getKeysValsForQueryInternal:query];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(result);
+        });
+    });
+}
+
+- (NSArray*)getValsForQueryInternal:(NSString*)query {
     @synchronized(self) {
         NSMutableArray *results = [NSMutableArray array];
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
@@ -213,7 +257,27 @@
     }
 }
 
-- (NSString*)getOneForQuery:(NSString*)query {
+-(NSArray *)getValsForQuery:(NSString *)query {
+    __block NSArray *result;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self getValsForQueryAsync:query callback:^(NSArray *val){
+        result = val;
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return result;
+}
+
+-(void)getValsForQueryAsync:(NSString *)query callback:(void (^)(NSArray *))callback {
+    dispatch_async(db_querying_queue, ^{
+        NSArray *result = [self getValsForQueryInternal:query];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callback(result);
+        });
+    });
+}
+
+- (NSString*)getOneForQueryInternal:(NSString*)query {
     @synchronized(self) {
         NSString *result = NULL;
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
@@ -315,7 +379,7 @@
 }
 
 
-- (NSString*)getValForKey:(NSString *)key{
+- (NSString*)getValForKeyInternal:(NSString *)key{
     @synchronized(self) {
         NSString *result = nil;
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
@@ -358,15 +422,25 @@
 
 -(void)getValForKeyAsync:(NSString *)key callback:(void (^)(NSString *value))callback {
     dispatch_async(db_querying_queue, ^{
-        NSString *result = [self getValForKey:key];
+        NSString *result = [self getValForKeyInternal:key];
         dispatch_async(dispatch_get_main_queue(), ^{
             callback(result);
         });
     });
 }
 
+-(NSString *)getValForKey:(NSString *)key {
+    __block NSString *result;
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self getValForKeyAsync:key callback:^(NSString *val){
+        result = val;
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
+    return result;
+}
 
-- (void)setVal:(NSString *)val forKey:(NSString *)key{
+- (void)setValInternal:(NSString *)val forKey:(NSString *)key{
     @synchronized(self) {
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
@@ -421,9 +495,17 @@
 
 -(void)setValAsync:(NSString *)val forKey:(NSString *)key callback:(void (^)())callback {
     dispatch_async(db_querying_queue, ^{
-        [self setVal:val forKey:key];
+        [self setValInternal:val forKey:key];
         dispatch_async(dispatch_get_main_queue(), callback);
     });
+}
+
+-(void)setVal:(NSString *)val forKey:(NSString *)key {
+    dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
+    [self setValAsync:val forKey:key callback:^{
+        dispatch_semaphore_signal(semaphore);
+    }];
+    dispatch_semaphore_wait(semaphore, DISPATCH_TIME_FOREVER);
 }
 
 #pragma mark - Application's Documents directory
