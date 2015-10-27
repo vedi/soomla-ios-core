@@ -118,7 +118,7 @@
 -(void)deleteKeyValWithKeyAsync:(NSString *)key callback:(void (^)())callback {
     dispatch_async(db_querying_queue, ^{
         [self deleteKeyValWithKeyInternal:key];
-        dispatch_async(dispatch_get_main_queue(), callback);
+        callback();
     });
 }
 
@@ -160,7 +160,7 @@
 -(void)purgeDatabaseAsync:(void (^)())callback {
     dispatch_async(db_querying_queue, ^{
         [self purgeDatabaseInternal];
-        dispatch_async(dispatch_get_main_queue(), callback);
+        callback();
     });
 }
 
@@ -215,9 +215,7 @@
 -(void)getKeysValsForQueryAsync:(NSString *)query callback:(void (^)(NSDictionary *result))callback {
     dispatch_async(db_querying_queue, ^{
         NSDictionary *result = [self getKeysValsForQueryInternal:query];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            callback(result);
-        });
+        callback(result);
     });
 }
 
@@ -271,9 +269,7 @@
 -(void)getValsForQueryAsync:(NSString *)query callback:(void (^)(NSArray *))callback {
     dispatch_async(db_querying_queue, ^{
         NSArray *result = [self getValsForQueryInternal:query];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            callback(result);
-        });
+        callback(result);
     });
 }
 
@@ -423,9 +419,7 @@
 -(void)getValForKeyAsync:(NSString *)key callback:(void (^)(NSString *value))callback {
     dispatch_async(db_querying_queue, ^{
         NSString *result = [self getValForKeyInternal:key];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            callback(result);
-        });
+        callback(result);
     });
 }
 
@@ -496,7 +490,7 @@
 -(void)setValAsync:(NSString *)val forKey:(NSString *)key callback:(void (^)())callback {
     dispatch_async(db_querying_queue, ^{
         [self setValInternal:val forKey:key];
-        dispatch_async(dispatch_get_main_queue(), callback);
+        callback();
     });
 }
 
