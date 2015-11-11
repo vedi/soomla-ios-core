@@ -1,2 +1,5 @@
 language: objective-c
+sudo: false
+install: true
 xcode_project: SoomlaiOSCore.xcodeproj
+xcode_scheme: SoomlaiOSCore
