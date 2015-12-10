@@ -66,7 +66,7 @@ static NSString *const SOOMLA_GENERATED_KEY = @"soomlaGeneratedId";
 + (NSString*)generateSoomlaId {
     NSString *soomlaGeneratedId = [[NSUserDefaults standardUserDefaults] stringForKey:SOOMLA_GENERATED_KEY];
     if (!soomlaGeneratedId) {
-        soomlaGeneratedId = [NSString stringWithFormat:@"SOOMLA_ID_%d%d", arc4random_uniform(100000), arc4random_uniform(100000)];
+        soomlaGeneratedId = [NSString stringWithFormat:@"SOOMLA_ID_i%d%d", arc4random_uniform(100000), arc4random_uniform(100000)];
         [[NSUserDefaults standardUserDefaults] setObject:soomlaGeneratedId forKey:SOOMLA_GENERATED_KEY];
     }
     return soomlaGeneratedId;
