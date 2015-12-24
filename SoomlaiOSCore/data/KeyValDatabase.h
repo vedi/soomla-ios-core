@@ -21,11 +21,11 @@
  The `KeyValDatabase` provides basic key-value store above SQLite.
  */
 @interface KeyValDatabase : NSObject{
-    @private
-    sqlite3 *database;
+//    @private
+//    sqlite3 *database;
 }
 
-- (id)init;
+//- (id)init;
 
 /**
  Sets the given `value` to the given `key`.
@@ -43,39 +43,39 @@
  */
 - (NSString*)getValForKey:(NSString *)key;
 
-/**
- Retrieves from DB the key-val pairs that answer the given `query`.
- 
- @param query What to fetch from the DB.
- @return key-val The key-val pairs that answer the given query.
- */
-- (NSDictionary*)getKeysValsForQuery:(NSString*)query;
-
-/**
- Retrieves from the DB the values of the key-val pairs that answer the given
- `query`.
- 
- @param query The query that indicates what to fetch from the DB.
- @return The values of the key-val pairs fetched.
- */
-- (NSArray*)getValsForQuery:(NSString*)query;
-
-/**
- Retrieves from the DB ONE value of the key-val pairs that answer the given
- `query`.
- 
- @param query The query that indicates what to fetch from the DB.
- @return ONE of the key-val pairs fetched (the first one).
- */
-- (NSString*)getOneForQuery:(NSString*)query;
-
-/**
- Counts the number of key-val pairs that answer the given `query`.
- 
- @param query The query that indicates what to count in the DB.
- @return the number of key-val pairs matching the query.
- */
-- (int)getCountForQuery:(NSString*)query;
+///**
+// Retrieves from DB the key-val pairs that answer the given `query`.
+// 
+// @param query What to fetch from the DB.
+// @return key-val The key-val pairs that answer the given query.
+// */
+//- (NSDictionary*)getKeysValsForQuery:(NSString*)query;
+//
+///**
+// Retrieves from the DB the values of the key-val pairs that answer the given
+// `query`.
+// 
+// @param query The query that indicates what to fetch from the DB.
+// @return The values of the key-val pairs fetched.
+// */
+//- (NSArray*)getValsForQuery:(NSString*)query;
+//
+///**
+// Retrieves from the DB ONE value of the key-val pairs that answer the given
+// `query`.
+// 
+// @param query The query that indicates what to fetch from the DB.
+// @return ONE of the key-val pairs fetched (the first one).
+// */
+//- (NSString*)getOneForQuery:(NSString*)query;
+//
+///**
+// Counts the number of key-val pairs that answer the given `query`.
+// 
+// @param query The query that indicates what to count in the DB.
+// @return the number of key-val pairs matching the query.
+// */
+//- (int)getCountForQuery:(NSString*)query;
 
 /**
  Gets all the keys in the DB
@@ -91,25 +91,25 @@
  */
 - (void)deleteKeyValWithKey:(NSString *)key;
 
-/**
- Purges the entire DB
- 
- NOTE: Use with caution, since this will delete all the user's local information
- This message is used mainly for while in testing.
- */
-- (void)purgeDatabase;
+///**
+// Purges the entire DB
+// 
+// NOTE: Use with caution, since this will delete all the user's local information
+// This message is used mainly for while in testing.
+// */
+//- (void)purgeDatabase;
 
 
 /** SOOMLA keys **/
-
-+ (NSString*) keyGoodBalance:(NSString*)itemId;
-
-+ (NSString*) keyGoodEquipped:(NSString*)itemId;
-
-+ (NSString*) keyGoodUpgrade:(NSString*)itemId;
-
-+ (NSString*) keyCurrencyBalance:(NSString*)itemId;
-
-+ (NSString*) keyMetaStoreInfo;
+//
+//+ (NSString*) keyGoodBalance:(NSString*)itemId;
+//
+//+ (NSString*) keyGoodEquipped:(NSString*)itemId;
+//
+//+ (NSString*) keyGoodUpgrade:(NSString*)itemId;
+//
+//+ (NSString*) keyCurrencyBalance:(NSString*)itemId;
+//
+//+ (NSString*) keyMetaStoreInfo;
 
 @end
