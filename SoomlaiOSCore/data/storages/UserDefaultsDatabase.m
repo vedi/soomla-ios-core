@@ -15,7 +15,6 @@
  */
 
 #import "UserDefaultsDatabase.h"
-#import "SoomlaConfig.h"
 #import "SoomlaUtils.h"
 
 
@@ -30,15 +29,18 @@ static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
 }
 
 - (void)setVal:(NSString *)val forKey:(NSString *)key {
+    LogDebug(TAG, @"Trying to set value...");
     [[NSUserDefaults standardUserDefaults] setObject:val forKey:[[self class] expandKey:key]];
 }
 
 - (NSString*)getValForKey:(NSString *)key {
+    LogDebug(TAG, @"Trying to get value...");
     NSString* result = [[NSUserDefaults standardUserDefaults] objectForKey:[[self class] expandKey:key]];
     return result;
 }
 
 - (void)deleteKeyValWithKey:(NSString *)key {
+    LogDebug(TAG, @"Trying to delete value...");
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:[[self class] expandKey:key]];
 }
 
