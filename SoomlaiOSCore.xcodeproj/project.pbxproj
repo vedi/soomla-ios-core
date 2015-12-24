@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2FA82DBDC03CB679266A58F /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */; };
+		B2FA86AC1B7C447C4ACA28F3 /* KeyValueDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */; };
+		B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */; };
+		B2FA8AC353792D1BA32F7047 /* UserDefaultsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */; };
+		B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */; };
 		C0233429194AEE40005DE53A /* SoomlaConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233425194AEE40005DE53A /* SoomlaConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023342A194AEE40005DE53A /* SoomlaConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233426194AEE40005DE53A /* SoomlaConfig.m */; };
 		C023342B194AEE40005DE53A /* SoomlaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233427194AEE40005DE53A /* SoomlaUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023342C194AEE40005DE53A /* SoomlaUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233428194AEE40005DE53A /* SoomlaUtils.m */; };
-		C0233446194AEE5F005DE53A /* KeyValDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233430194AEE5F005DE53A /* KeyValDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C0233447194AEE5F005DE53A /* KeyValDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233431194AEE5F005DE53A /* KeyValDatabase.m */; };
 		C0233448194AEE5F005DE53A /* KeyValueStorage.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233432194AEE5F005DE53A /* KeyValueStorage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0233449194AEE5F005DE53A /* KeyValueStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233433194AEE5F005DE53A /* KeyValueStorage.m */; };
 		C0233450194AEE5F005DE53A /* SoomlaEncryptor.h in Headers */ = {isa = PBXBuildFile; fileRef = C023343A194AEE5F005DE53A /* SoomlaEncryptor.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -60,12 +64,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueDatabase.h; sourceTree = "<group>"; };
+		B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDatabase.h; sourceTree = "<group>"; };
+		B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueDatabase.m; sourceTree = "<group>"; };
+		B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteDatabase.m; sourceTree = "<group>"; };
+		B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDatabase.h; sourceTree = "<group>"; };
+		B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsDatabase.m; sourceTree = "<group>"; };
 		C0233425194AEE40005DE53A /* SoomlaConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaConfig.h; sourceTree = "<group>"; };
 		C0233426194AEE40005DE53A /* SoomlaConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaConfig.m; sourceTree = "<group>"; };
 		C0233427194AEE40005DE53A /* SoomlaUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaUtils.h; sourceTree = "<group>"; };
 		C0233428194AEE40005DE53A /* SoomlaUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoomlaUtils.m; sourceTree = "<group>"; };
-		C0233430194AEE5F005DE53A /* KeyValDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValDatabase.h; sourceTree = "<group>"; };
-		C0233431194AEE5F005DE53A /* KeyValDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValDatabase.m; sourceTree = "<group>"; };
 		C0233432194AEE5F005DE53A /* KeyValueStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueStorage.h; sourceTree = "<group>"; };
 		C0233433194AEE5F005DE53A /* KeyValueStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueStorage.m; sourceTree = "<group>"; };
 		C023343A194AEE5F005DE53A /* SoomlaEncryptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoomlaEncryptor.h; sourceTree = "<group>"; };
@@ -114,6 +122,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2FA8A3EE8C2D8593CFD5C84 /* storages */ = {
+			isa = PBXGroup;
+			children = (
+				B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */,
+				B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */,
+				B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */,
+				B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */,
+				B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */,
+				B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */,
+			);
+			path = storages;
+			sourceTree = "<group>";
+		};
 		C023342D194AEE5F005DE53A /* data */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,12 +142,11 @@
 				C023346F194B058C005DE53A /* JSONConsts.m */,
 				C023346A194B055E005DE53A /* RewardStorage.h */,
 				C023346B194B055E005DE53A /* RewardStorage.m */,
-				C0233430194AEE5F005DE53A /* KeyValDatabase.h */,
-				C0233431194AEE5F005DE53A /* KeyValDatabase.m */,
 				C0233432194AEE5F005DE53A /* KeyValueStorage.h */,
 				C0233433194AEE5F005DE53A /* KeyValueStorage.m */,
 				C023343A194AEE5F005DE53A /* SoomlaEncryptor.h */,
 				C023343B194AEE5F005DE53A /* SoomlaEncryptor.m */,
+				B2FA8A3EE8C2D8593CFD5C84 /* storages */,
 			);
 			path = data;
 			sourceTree = "<group>";
@@ -234,7 +254,6 @@
 				C0233489194B06C1005DE53A /* SoomlaEventHandling.h in Headers */,
 				EFC127D3194E046100CDA66B /* DictionaryFactory.h in Headers */,
 				C09D1CFB1992676500BC370A /* Schedule.h in Headers */,
-				C0233446194AEE5F005DE53A /* KeyValDatabase.h in Headers */,
 				C023347D194B05C0005DE53A /* BadgeReward.h in Headers */,
 				C0233470194B058C005DE53A /* JSONConsts.h in Headers */,
 				C023345F194AEEB8005DE53A /* FBEncryptorAES.h in Headers */,
@@ -242,6 +261,9 @@
 				C0233464194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch in Headers */,
 				C0FD6017197C18E6003001F5 /* SoomlaEntity.h in Headers */,
 				C023346C194B055E005DE53A /* RewardStorage.h in Headers */,
+				B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */,
+				B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */,
+				B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +338,6 @@
 			files = (
 				C0FD6018197C18E6003001F5 /* SoomlaEntity.m in Sources */,
 				C023347E194B05C0005DE53A /* BadgeReward.m in Sources */,
-				C0233447194AEE5F005DE53A /* KeyValDatabase.m in Sources */,
 				C0233451194AEE5F005DE53A /* SoomlaEncryptor.m in Sources */,
 				C0233460194AEEB8005DE53A /* FBEncryptorAES.m in Sources */,
 				C0233462194AEEB8005DE53A /* NSData-Base64.m in Sources */,
@@ -332,6 +353,9 @@
 				C023346D194B055E005DE53A /* RewardStorage.m in Sources */,
 				C023342C194AEE40005DE53A /* SoomlaUtils.m in Sources */,
 				EF9E24C91950528E007A3082 /* Soomla.m in Sources */,
+				B2FA8AC353792D1BA32F7047 /* UserDefaultsDatabase.m in Sources */,
+				B2FA82DBDC03CB679266A58F /* SQLiteDatabase.m in Sources */,
+				B2FA86AC1B7C447C4ACA28F3 /* KeyValueDatabase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

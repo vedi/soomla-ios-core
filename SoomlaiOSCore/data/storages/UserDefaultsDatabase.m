@@ -1,5 +1,5 @@
 /*
- Copyright (C) 2012-2014 Soomla Inc.
+ Copyright (C) 2012-2015 Soomla Inc.
  
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -14,29 +14,60 @@
  limitations under the License.
  */
 
-#import "KeyValDatabase.h"
+#import "UserDefaultsDatabase.h"
 #import "SoomlaConfig.h"
 #import "SoomlaUtils.h"
 
 
-@implementation KeyValDatabase
+@implementation UserDefaultsDatabase
 
-- (void)setVal:(NSString *)val forKey:(NSString *)key{
-    [[NSUserDefaults standardUserDefaults] setObject:val forKey:key];
+static NSString *SOOMLA_DATABASE_PREFIX = @"SOOMLA";
+
+static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
+
++(NSString *)expandKey:(NSString *)key {
+    return [NSString stringWithFormat:@"%@.%@", SOOMLA_DATABASE_PREFIX, key];
 }
 
-- (NSString*)getValForKey:(NSString *)key{
-    NSString* result = [[NSUserDefaults standardUserDefaults] objectForKey:key];
+- (void)setVal:(NSString *)val forKey:(NSString *)key {
+    [[NSUserDefaults standardUserDefaults] setObject:val forKey:[[self class] expandKey:key]];
+}
+
+- (NSString*)getValForKey:(NSString *)key {
+    NSString* result = [[NSUserDefaults standardUserDefaults] objectForKey:[[self class] expandKey:key]];
     return result;
 }
 
 - (void)deleteKeyValWithKey:(NSString *)key {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[[self class] expandKey:key]];
 }
 
 - (NSArray *)getAllKeys {
-    NSArray *keys = [[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys];
-    return keys;
+    return [self getAllKeysUnwrapping:YES];
+}
+
+-(NSArray *)getAllKeysUnwrapping:(BOOL)unwrap {
+    NSArray *rawKeys = [[[[NSUserDefaults standardUserDefaults] dictionaryRepresentation] allKeys]
+            filteredArrayUsingPredicate:[NSPredicate
+                    predicateWithFormat:@"SELF BEGINSWITH %@", [NSString stringWithFormat:@"%@.", SOOMLA_DATABASE_PREFIX]
+            ]
+    ];
+    if (unwrap) {
+        NSMutableArray *keys = [NSMutableArray new];
+        for (NSString *key in rawKeys) {
+            [keys addObject:[key substringFromIndex:[key rangeOfString:[NSString stringWithFormat:@"%@.", SOOMLA_DATABASE_PREFIX]].location]];
+        }
+        return keys;
+    } else {
+        return rawKeys;
+    }
+}
+
+- (void)purgeDatabase {
+    NSArray *allKeys = [self getAllKeysUnwrapping:NO];
+    [allKeys enumerateObjectsUsingBlock:^(id key, NSUInteger idx, BOOL *stop) {
+        [self deleteKeyValWithKey:(NSString *)key];
+    }];
 }
 
 //-------- Possible unnecessary or obsolete methods ---------//
@@ -75,41 +106,6 @@
                       userInfo:nil];
     @throw e;
 }
-
-- (void)purgeDatabase {
-    // if necessary we could iterate over all the keys
-    // and delete those keys that begin with DB_KEY_PREFIX
-    NSLog(@"purgeDatabase");
-    NSException *e = [NSException
-                      exceptionWithName:@"NotImplemented"
-                      reason:@"If we need this then we "
-                      userInfo:nil];
-    @throw e;
-}
-
-
-static NSString* TAG = @"SOOMLA KeyValDatabase";
-
-//--------- I believe this are obsolete also ------//
-//+ (NSString*) keyGoodBalance:(NSString*)itemId {
-//    return [NSString stringWithFormat:@"good.%@.balance", itemId];
-//}
-//
-//+ (NSString*) keyGoodEquipped:(NSString*)itemId {
-//    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
-//}
-//
-//+ (NSString*) keyGoodUpgrade:(NSString*)itemId {
-//    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
-//}
-//
-//+ (NSString*) keyCurrencyBalance:(NSString*)itemId {
-//    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
-//}
-//
-//+ (NSString*) keyMetaStoreInfo {
-//    return @"meta.storeinfo";
-//}
 
 
 @end

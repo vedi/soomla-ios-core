@@ -15,18 +15,18 @@
  */
 
 #import "KeyValueStorage.h"
-#import "KeyValDatabase.h"
+#import "UserDefaultsDatabase.h"
 #import "SoomlaEncryptor.h"
-#import "KeyValDatabase.h"
+#import "UserDefaultsDatabase.h"
 #import "SoomlaConfig.h"
 #import "SoomlaUtils.h"
 
 @implementation KeyValueStorage
 
-+ (KeyValDatabase*)kvDatabase {
-    static KeyValDatabase* dbInstance;
++ (UserDefaultsDatabase *)kvDatabase {
+    static UserDefaultsDatabase * dbInstance;
     if (!dbInstance) {
-        dbInstance = [[KeyValDatabase alloc] init];
+        dbInstance = [[UserDefaultsDatabase alloc] init];
     }
     return dbInstance;
 }
