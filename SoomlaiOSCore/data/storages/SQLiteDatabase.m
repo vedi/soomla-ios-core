@@ -413,24 +413,10 @@ static NSString* TAG = @"SOOMLA SQLiteDatabase";
     return basePath;
 }
 
-+ (NSString*) keyGoodBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.balance", itemId];
-}
-
-+ (NSString*) keyGoodEquipped:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
-}
-
-+ (NSString*) keyGoodUpgrade:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
-}
-
-+ (NSString*) keyCurrencyBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
-}
-
-+ (NSString*) keyMetaStoreInfo {
-    return @"meta.storeinfo";
+- (void)dealloc {
+    if (database) {
+        sqlite3_close(database);
+    }
 }
 
 @end
