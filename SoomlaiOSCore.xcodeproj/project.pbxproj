@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		B2FA82DBDC03CB679266A58F /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */; };
-		B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8A66460B74E096DBD239 /* KeyValueDatabase+DatabaseSelector.h */; };
+		B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8A66460B74E096DBD239 /* KeyValueDatabase+DatabaseSelector.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2FA86AC1B7C447C4ACA28F3 /* KeyValueDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */; };
 		B2FA8994A66F738419C5D450 /* KeyValueDatabase+DatabaseSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA81463F48CEF4D148B33C /* KeyValueDatabase+DatabaseSelector.m */; };
-		B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */; };
+		B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2FA8AC353792D1BA32F7047 /* UserDefaultsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */; };
-		B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */; };
+		B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		C0233429194AEE40005DE53A /* SoomlaConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233425194AEE40005DE53A /* SoomlaConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C023342A194AEE40005DE53A /* SoomlaConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C0233426194AEE40005DE53A /* SoomlaConfig.m */; };
 		C023342B194AEE40005DE53A /* SoomlaUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = C0233427194AEE40005DE53A /* SoomlaUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -257,20 +257,20 @@
 				EF9E24C81950528E007A3082 /* Soomla.h in Headers */,
 				C0233461194AEEB8005DE53A /* NSData-Base64.h in Headers */,
 				C0233448194AEE5F005DE53A /* KeyValueStorage.h in Headers */,
+				B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */,
+				B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */,
 				C0233489194B06C1005DE53A /* SoomlaEventHandling.h in Headers */,
 				EFC127D3194E046100CDA66B /* DictionaryFactory.h in Headers */,
 				C09D1CFB1992676500BC370A /* Schedule.h in Headers */,
 				C023347D194B05C0005DE53A /* BadgeReward.h in Headers */,
 				C0233470194B058C005DE53A /* JSONConsts.h in Headers */,
 				C023345F194AEEB8005DE53A /* FBEncryptorAES.h in Headers */,
+				B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */,
+				B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */,
 				C0233450194AEE5F005DE53A /* SoomlaEncryptor.h in Headers */,
 				C0233464194AEF7D005DE53A /* SoomlaiOSCore-Prefix.pch in Headers */,
 				C0FD6017197C18E6003001F5 /* SoomlaEntity.h in Headers */,
 				C023346C194B055E005DE53A /* RewardStorage.h in Headers */,
-				B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */,
-				B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */,
-				B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */,
-				B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
