@@ -9,7 +9,9 @@
 /* Begin PBXBuildFile section */
 		B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B2FA82DBDC03CB679266A58F /* SQLiteDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */; };
+		B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8A66460B74E096DBD239 /* KeyValueDatabase+DatabaseSelector.h */; };
 		B2FA86AC1B7C447C4ACA28F3 /* KeyValueDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */; };
+		B2FA8994A66F738419C5D450 /* KeyValueDatabase+DatabaseSelector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA81463F48CEF4D148B33C /* KeyValueDatabase+DatabaseSelector.m */; };
 		B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */; };
 		B2FA8AC353792D1BA32F7047 /* UserDefaultsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */; };
 		B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */ = {isa = PBXBuildFile; fileRef = B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */; };
@@ -65,8 +67,10 @@
 
 /* Begin PBXFileReference section */
 		B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyValueDatabase.h; sourceTree = "<group>"; };
+		B2FA81463F48CEF4D148B33C /* KeyValueDatabase+DatabaseSelector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "KeyValueDatabase+DatabaseSelector.m"; sourceTree = "<group>"; };
 		B2FA8528F089234D8C33E637 /* UserDefaultsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultsDatabase.h; sourceTree = "<group>"; };
 		B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyValueDatabase.m; sourceTree = "<group>"; };
+		B2FA8A66460B74E096DBD239 /* KeyValueDatabase+DatabaseSelector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "KeyValueDatabase+DatabaseSelector.h"; sourceTree = "<group>"; };
 		B2FA8AEF95E10D9797BFA5E3 /* SQLiteDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SQLiteDatabase.m; sourceTree = "<group>"; };
 		B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SQLiteDatabase.h; sourceTree = "<group>"; };
 		B2FA8D9DD4874C8D06D93686 /* UserDefaultsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultsDatabase.m; sourceTree = "<group>"; };
@@ -131,6 +135,8 @@
 				B2FA8C06F4AF3C766CC56100 /* SQLiteDatabase.h */,
 				B2FA87DD19C59F33D6DBB38A /* KeyValueDatabase.m */,
 				B2FA8106841FD8CA367E8FB8 /* KeyValueDatabase.h */,
+				B2FA81463F48CEF4D148B33C /* KeyValueDatabase+DatabaseSelector.m */,
+				B2FA8A66460B74E096DBD239 /* KeyValueDatabase+DatabaseSelector.h */,
 			);
 			path = storages;
 			sourceTree = "<group>";
@@ -264,6 +270,7 @@
 				B2FA8118D8B26BD17994D864 /* UserDefaultsDatabase.h in Headers */,
 				B2FA8CFAB7F79D2034F54F2C /* SQLiteDatabase.h in Headers */,
 				B2FA8A147C56BA6AFD91770C /* KeyValueDatabase.h in Headers */,
+				B2FA86557BDBDDB71098B22B /* KeyValueDatabase+DatabaseSelector.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +363,7 @@
 				B2FA8AC353792D1BA32F7047 /* UserDefaultsDatabase.m in Sources */,
 				B2FA82DBDC03CB679266A58F /* SQLiteDatabase.m in Sources */,
 				B2FA86AC1B7C447C4ACA28F3 /* KeyValueDatabase.m in Sources */,
+				B2FA8994A66F738419C5D450 /* KeyValueDatabase+DatabaseSelector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

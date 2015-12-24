@@ -15,11 +15,14 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "KeyValueDatabase.h"
+#import "KeyValueDatabase+DatabaseSelector.h"
 
 @interface Soomla : NSObject
 
 extern NSString* SOOMLA_SECRET;
 
 + (void)initializeWithSecret:(NSString *)secret;
++ (void)initializeWithSecret:(NSString *)secret andDatabaseType:(KeyValueDatabaseType)databaseType;
 
 @end
