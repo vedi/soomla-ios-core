@@ -15,12 +15,9 @@
  */
 
 #import "KeyValueStorage.h"
-#import "UserDefaultsDatabase.h"
-#import "SoomlaEncryptor.h"
-#import "UserDefaultsDatabase.h"
-#import "SoomlaConfig.h"
-#import "SoomlaUtils.h"
 #import "KeyValueDatabase.h"
+#import "SoomlaEncryptor.h"
+#import "SoomlaUtils.h"
 
 @implementation KeyValueStorage
 

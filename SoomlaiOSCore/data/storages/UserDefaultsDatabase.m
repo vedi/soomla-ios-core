@@ -76,7 +76,7 @@ static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
 - (NSDictionary*)getKeysValsForQuery:(NSString*)query {
     NSLog(@"getKeysValsForQuery: query: %@",query);
     NSException *e = [NSException
-                      exceptionWithName:@"NotImplemented"
+                      exceptionWithName:@"UnsupportedOperationException"
                       reason:@"Just finding what is used"
                       userInfo:nil];
     @throw e;
@@ -85,7 +85,7 @@ static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
 - (NSArray*)getValsForQuery:(NSString*)query {
     NSLog(@"getValsForQuery: query: %@",query);
     NSException *e = [NSException
-                      exceptionWithName:@"NotImplemented"
+                      exceptionWithName:@"UnsupportedOperationException"
                       reason:@"Just finding what is used"
                       userInfo:nil];
     @throw e;
@@ -94,7 +94,7 @@ static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
 - (NSString*)getOneForQuery:(NSString*)query {
     NSLog(@"getOneForQuery: query: %@",query);
     NSException *e = [NSException
-                      exceptionWithName:@"NotImplemented"
+                      exceptionWithName:@"UnsupportedOperationException"
                       reason:@"Just finding what is used"
                       userInfo:nil];
     @throw e;
@@ -103,7 +103,7 @@ static NSString* TAG = @"SOOMLA UserDefaultsDatabase";
 - (int)getCountForQuery:(NSString*)query {
     NSLog(@"getCountForQuery: query: %@",query);
     NSException *e = [NSException
-                      exceptionWithName:@"NotImplemented"
+                      exceptionWithName:@"UnsupportedOperationException"
                       reason:@"Just finding what is used"
                       userInfo:nil];
     @throw e;
