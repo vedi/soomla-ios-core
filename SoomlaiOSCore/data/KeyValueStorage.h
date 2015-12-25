@@ -16,12 +16,21 @@
 
 #import <Foundation/Foundation.h>
 
+@class KeyValueDatabase;
+
 /**
  This class provides basic storage operations for a simple key-value store.
  */
 @interface KeyValueStorage : NSObject {
 
 }
+
+/**
+ Sets Key-Value database to operate with data in low-level.
+
+ @param keyValueDatabase The key-value database instance.
+ */
++ (void)setDatabase:(KeyValueDatabase *)keyValueDatabase;
 
 /**
  Retrieves the value for the given `key`.

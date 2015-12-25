@@ -1,12 +1,12 @@
 /*
- Copyright (C) 2012-2014 Soomla Inc.
- 
+ Copyright (C) 2012-2015 Soomla Inc.
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
  http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,8 +14,8 @@
  limitations under the License.
  */
 
-#import "KeyValDatabase.h"
-#import "SoomlaConfig.h"
+#import "SQLiteDatabase.h"
+#import <sqlite3.h>
 #import "SoomlaUtils.h"
 
 #define DATABASE_NAME @"store.kv.db"
@@ -25,14 +25,17 @@
 #define KEYVAL_COLUMN_KEY   @"key"
 #define KEYVAL_COLUMN_VAL   @"val"
 
+@implementation SQLiteDatabase {
+    sqlite3 *database;
+}
 
-@implementation KeyValDatabase
+static NSString* TAG = @"SOOMLA SQLiteDatabase";
 
 - (void)createDBWithPath:(const char *)dbpath {
     if (sqlite3_open(dbpath, &database) == SQLITE_OK)
     {
         char *errMsg;
-        
+
         NSString* createStmt = [NSString stringWithFormat:@"CREATE TABLE IF NOT EXISTS %@ (%@ TEXT PRIMARY KEY, %@ TEXT)", KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL];
         if (sqlite3_exec(database, [createStmt UTF8String], NULL, NULL, &errMsg) != SQLITE_OK)
         {
@@ -40,7 +43,7 @@
         }
 
         sqlite3_close(database);
-        
+
     } else {
         LogError(TAG, @"Failed to open/create database (createDBWithPath)");
     }
@@ -61,10 +64,10 @@
                     [filemgr removeItemAtPath:oldDatabasebPath error:nil];
                 }
             }
-            
+
             if ([filemgr fileExistsAtPath: databasebPath] == NO) {
                 [self createDBWithPath:[databasebPath UTF8String]];
-                
+
                 NSURL* url = [NSURL fileURLWithPath:databasebPath];
                 [SoomlaUtils addSkipBackupAttributeToItemAtURL:url];
             }
@@ -79,20 +82,20 @@
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
         {
             NSString* deleteStmt = [NSString stringWithFormat:@"DELETE FROM %@ WHERE %@=?",
-                                    KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY];
+                            KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY];
             sqlite3_stmt *statement;
             if (sqlite3_prepare_v2(database, [deleteStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
                 LogError(TAG, ([NSString stringWithFormat:@"Deleting key:'%@' failed: %s.", key, sqlite3_errmsg(database)]));
             }
             else{
                 sqlite3_bind_text(statement, 1, [key UTF8String], -1, SQLITE_TRANSIENT);
-                
+
                 if(SQLITE_DONE != sqlite3_step(statement)){
                     NSAssert1(0, @"Error while deleting. '%s'", sqlite3_errmsg(database));
                     sqlite3_reset(statement);
                 }
             }
-            
+
             // Finalize and close database.
             sqlite3_finalize(statement);
             sqlite3_close(database);
@@ -119,7 +122,7 @@
                     sqlite3_reset(statement);
                 }
             }
-            
+
             // Finalize and close database.
             sqlite3_finalize(statement);
             sqlite3_close(database);
@@ -152,11 +155,11 @@
                         LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                     }
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -188,11 +191,11 @@
                         LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                     }
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -224,11 +227,11 @@
                         LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                     }
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -254,11 +257,11 @@
                 while (sqlite3_step(statement) == SQLITE_ROW) {
                     count = sqlite3_column_int(statement, 0);
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -289,11 +292,11 @@
                         LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
                     }
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -319,23 +322,23 @@
                 while (sqlite3_step(statement) == SQLITE_ROW) {
 //                    for (int i=0; i<sqlite3_column_count(statement); i++) {
 //                        NSString* colName = [NSString stringWithUTF8String:sqlite3_column_name(statement, i)];
-                    
+
 //                        if ([colName isEqualToString:KEYVAL_COLUMN_VAL]) {
-                            int colType = sqlite3_column_type(statement, 0);
-                            if (colType == SQLITE_TEXT) {
-                                const unsigned char *col = sqlite3_column_text(statement, 0);
-                                result = [NSString stringWithFormat:@"%s", col];
-                            } else {
-                                LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
-                            }
+                    int colType = sqlite3_column_type(statement, 0);
+                    if (colType == SQLITE_TEXT) {
+                        const unsigned char *col = sqlite3_column_text(statement, 0);
+                        result = [NSString stringWithFormat:@"%s", col];
+                    } else {
+                        LogError(TAG, @"ERROR: UNKNOWN COLUMN DATATYPE");
+                    }
 //                        }
 //                    }
                 }
-                
+
                 // Finalize
                 sqlite3_finalize(statement);
             }
-            
+
             // Close database
             sqlite3_close(database);
         }
@@ -352,9 +355,9 @@
         NSString* databasebPath = [[SoomlaUtils applicationDirectory] stringByAppendingPathComponent:DATABASE_NAME];
         if (sqlite3_open([databasebPath UTF8String], &database) == SQLITE_OK)
         {
-            
+
             NSString* updateStmt = [NSString stringWithFormat:@"UPDATE %@ SET %@=? WHERE %@=?",
-                                    KEYVAL_TABLE_NAME, KEYVAL_COLUMN_VAL, KEYVAL_COLUMN_KEY];
+                            KEYVAL_TABLE_NAME, KEYVAL_COLUMN_VAL, KEYVAL_COLUMN_KEY];
             sqlite3_stmt *statement;
             if (sqlite3_prepare_v2(database, [updateStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
                 LogError(TAG, ([NSString stringWithFormat:@"Updating key:'%@' with val:'%@' failed: %s.", key, val, sqlite3_errmsg(database)]));
@@ -362,26 +365,26 @@
             else{
                 sqlite3_bind_text(statement, 1, [val UTF8String], -1, SQLITE_TRANSIENT);
                 sqlite3_bind_text(statement, 2, [key UTF8String], -1, SQLITE_TRANSIENT);
-                
+
                 if(SQLITE_DONE != sqlite3_step(statement)){
                     NSAssert1(0, @"Error while updating. '%s'", sqlite3_errmsg(database));
                     sqlite3_reset(statement);
                 }
                 else {
                     int rowsaffected = sqlite3_changes(database);
-                    
+
                     if (rowsaffected == 0){
                         // Finalize before reuse
                         LogDebug(TAG, @"Finalizing previous statement before reusing it");
                         sqlite3_finalize(statement);
-                        
+
                         LogDebug(TAG, @"Can't update item b/c it doesn't exist. Trying to add a new one.");
                         NSString* addStmt = [NSString stringWithFormat:@"INSERT INTO %@ (%@, %@) VALUES('%@', '%@')",
-                                             KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL, key, val];
+                                        KEYVAL_TABLE_NAME, KEYVAL_COLUMN_KEY, KEYVAL_COLUMN_VAL, key, val];
                         if (sqlite3_prepare_v2(database, [addStmt UTF8String], -1, &statement, NULL) != SQLITE_OK){
                             LogError(TAG, ([NSString stringWithFormat:@"Adding new item failed: %s. \"George is getting upset!\"", sqlite3_errmsg(database)]));
                         }
-                        
+
                         if(SQLITE_DONE != sqlite3_step(statement)){
                             NSAssert1(0, @"Error while adding item. '%s'", sqlite3_errmsg(database));
                             sqlite3_reset(statement);
@@ -389,7 +392,7 @@
                     }
                 }
             }
-            
+
             // Finalize and close database.
             sqlite3_finalize(statement);
             sqlite3_close(database);
@@ -405,32 +408,15 @@
 // Returns the URL to the application's Documents directory.
 - (NSString *) applicationDocumentsDirectory
 {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *basePath = ([paths count] > 0) ? paths[0] : nil;
-        return basePath;
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *basePath = ([paths count] > 0) ? paths[0] : nil;
+    return basePath;
 }
 
-static NSString* TAG = @"SOOMLA KeyValDatabase";
-
-+ (NSString*) keyGoodBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.balance", itemId];
+- (void)dealloc {
+    if (database) {
+        sqlite3_close(database);
+    }
 }
-
-+ (NSString*) keyGoodEquipped:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.equipped", itemId];
-}
-
-+ (NSString*) keyGoodUpgrade:(NSString*)itemId {
-    return [NSString stringWithFormat:@"good.%@.currentUpgrade", itemId];
-}
-
-+ (NSString*) keyCurrencyBalance:(NSString*)itemId {
-    return [NSString stringWithFormat:@"currency.%@.balance", itemId];
-}
-
-+ (NSString*) keyMetaStoreInfo {
-    return @"meta.storeinfo";
-}
-
 
 @end

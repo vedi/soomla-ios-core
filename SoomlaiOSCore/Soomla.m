@@ -15,6 +15,7 @@
  */
 
 #import "Soomla.h"
+#import "KeyValueStorage.h"
 
 #define SOOMLA_CORE_VERSION @"1.0.7"
 
@@ -23,7 +24,12 @@
 NSString* SOOMLA_SECRET = @"SOOMLA_SEC";
 
 + (void)initializeWithSecret:(NSString *)secret {
+    [[self class] initializeWithSecret:secret andDatabaseType:KeyValueDatabaseTypeSQLite];
+}
+
++ (void)initializeWithSecret:(NSString *)secret andDatabaseType:(KeyValueDatabaseType)databaseType {
     SOOMLA_SECRET = secret;
+    [KeyValueStorage setDatabase:[KeyValueDatabase databaseByType:databaseType]];
 }
 
 + (NSString*)getVersion {

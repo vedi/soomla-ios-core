@@ -15,18 +15,17 @@
  */
 
 #import "KeyValueStorage.h"
-#import "KeyValDatabase.h"
+#import "KeyValueDatabase.h"
 #import "SoomlaEncryptor.h"
-#import "KeyValDatabase.h"
-#import "SoomlaConfig.h"
 #import "SoomlaUtils.h"
 
 @implementation KeyValueStorage
 
-+ (KeyValDatabase*)kvDatabase {
-    static KeyValDatabase* dbInstance;
+static KeyValueDatabase * dbInstance;
+
++ (KeyValueDatabase *)kvDatabase {
     if (!dbInstance) {
-        dbInstance = [[KeyValDatabase alloc] init];
+        dbInstance = [[KeyValueDatabase alloc] init];
     }
     return dbInstance;
 }
@@ -38,6 +37,10 @@
     }
     
     return self;
+}
+
++(void)setDatabase:(KeyValueDatabase *)keyValueDatabase {
+    dbInstance = keyValueDatabase;
 }
 
 + (NSString*)getValueForKey:(NSString*)key {
@@ -69,7 +72,7 @@
         if (val && [val length]>0){
             NSString* valDec = [SoomlaEncryptor decryptToString:val];
             if (valDec && [valDec length]>0){
-                [results setObject:valDec forKey:key];
+                results[key] = valDec;
             }
         }
     }
