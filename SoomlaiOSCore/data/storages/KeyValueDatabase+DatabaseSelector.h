@@ -7,8 +7,8 @@
 #import "KeyValueDatabase.h"
 
 typedef enum {
-    KeyValueDatabaseTypeUserDefaults = 0,
-    KeyValueDatabaseTypeSQLite
+    KeyValueDatabaseTypeSQLite = 0,
+    KeyValueDatabaseTypeUserDefaults
 } KeyValueDatabaseType;
 
 @interface KeyValueDatabase (DatabaseSelector)
